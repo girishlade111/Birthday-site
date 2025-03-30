@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #ffe0e0, #ffc0cb);
+            color: #333;
+            animation: backgroundSparkle 10s linear infinite;
+        }
+
+        @keyframes backgroundSparkle {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><circle cx="5" cy="5" r="1" fill="white"/></svg>');
+            opacity: 0.3;
+            animation: sparkle 2s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0.3; }
+        }
+
+
+        section {
+            padding: 40px 15px; /* Reduced padding for mobile */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1, h2 {
+            color: #e53935;
+            text-shadow: 2px 2px 3px #f8bbd0;
+        }
+
+        h1 {
+            font-size: 2em; /* Reduced font size for mobile */
+            animation: glowText 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowText {
+            from { text-shadow: 2px 2px 3px #f8bbd0; color: #e53935; }
+            to { text-shadow: 2px 2px 10px #f8bbd0, 0 0 10px #fff; color: #ff4081; }
+        }
+
+        p {
+            font-size: 1em; /* Reduced font size for mobile */
+            line-height: 1.5; /* Slightly adjusted line height for readability */
+            color: #555;
+        }
+
+        .heart-animation {
+            position: absolute;
+            font-size: 1.5em; /* Reduced heart size for mobile */
+            color: #ff4081;
+            animation: floatHeart 5s linear infinite;
+            top: 10%; /* Adjusted top position for mobile */
+            left: 5%; /* Adjusted left position for mobile */
+            opacity: 0.7;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(10px) translateX(10px) rotate(180deg); opacity: 1; } /* Reduced animation distance */
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.7; }
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px; /* Reduced margin for mobile */
+            opacity: 0;
+            transform: translateY(30px); /* Reduced translateY for mobile */
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: var(--item-delay);
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timeline-item img {
+            width: 100%; /* Make images responsive within timeline item */
+            max-width: 250px; /* Limit max width on larger screens if needed */
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px #aaa;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-item img:hover {
+            transform: scale(1.02); /* Reduced scale on hover for mobile */
+            box-shadow: 3px 3px 5px #888; /* Reduced shadow on hover for mobile */
+            cursor: pointer;
+        }
+
+        .timeline-item img:hover::after {
+            content: '\2665'; /* Unicode heart symbol */
+            position: absolute;
+            font-size: 1.5em; /* Reduced heart size on hover for mobile */
+            color: #ff4081;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item img:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 15px; /* Reduced padding for mobile */
+            margin-left: -15px; /* Adjust margin to align with section padding */
+            margin-right: -15px; /* Adjust margin to align with section padding */
+            padding-left: 15px; /* Ensure padding is applied even with negative margins */
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 70%; /* Carousel items take more width on mobile */
+            max-width: 300px; /* Limit max width */
+            margin-right: 10px;
+            scroll-snap-align: start;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 2px 2px 3px #ccc;
+            transition: transform 0.3s ease;
+        }
+        .carousel-item img:hover {
+            transform: scale(1.02); /* Reduced scale on hover for mobile */
+            cursor: pointer;
+        }
+
+
+        .gift-box {
+            width: 120px; /* Reduced gift box size for mobile */
+            height: 120px; /* Reduced gift box size for mobile */
+            background-color: #f8bbd0;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            margin: 20px auto;
+            transition: transform 0.5s ease;
+            animation: giftShake 1s ease-in-out infinite;
+        }
+
+        @keyframes giftShake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); } /* Reduced shake angle for mobile */
+            75% { transform: rotate(-3deg); } /* Reduced shake angle for mobile */
+        }
+
+        .gift-box::before, .gift-box::after {
+            content: '';
+            position: absolute;
+            background-color: #e53935;
+        }
+
+        .gift-box::before {
+            width: 100%;
+            height: 15px; /* Reduced ribbon height for mobile */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .gift-box::after {
+            width: 15px; /* Reduced ribbon width for mobile */
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gift-box:hover {
+            transform: scale(1.02); /* Reduced scale on hover for mobile */
+        }
+
+        .surprise-content {
+            display: none;
+            margin-top: 15px; /* Reduced margin for mobile */
+        }
+
+        .fireworks-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1; /* Behind content */
+        }
+
+        .love-letter-text {
+            font-family: 'Homemade Apple', cursive; /* Fallback if font loading fails */
+            font-size: 1.1em; /* Reduced font size for mobile */
+            line-height: 1.7; /* Adjusted line height for readability */
+            color: #555;
+            white-space: pre-line; /* Important for preserving line breaks */
+        }
+
+        @font-face {
+            font-family: 'Homemade Apple';
+            src: url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap'); /* External font link - consider local hosting */
+        }
+
+
+        .typing-animation {
+            overflow: hidden; /* Ensures the cursor will be visible */
+            border-right: .1em solid rgba(0,0,0,.75);
+            white-space: nowrap;
+            letter-spacing: .05em;
+            animation: typing 3.5s steps(40, end),
+                       blink-caret .75s step-end infinite alternate;
+            font-size: 1em; /* Match love letter font size in mobile view */
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(0,0,0,.75); }
+        }
+
+        .rose-petals {
+            position: absolute;
+            top: -20px; /* Start above the section */
+            left: 0;
+            width: 100%;
+            height: 120%; /* Cover more area than the section */
+            pointer-events: none;
+            overflow: hidden; /* Hide petals outside the section */
+        }
+
+        .petal {
+            position: absolute;
+            color: #ff4081;
+            font-size: 1.2em; /* Reduced petal size for mobile */
+            animation: fallRosePetal var(--fall-duration) linear infinite;
+            left: var(--petal-start-pos);
+            top: -20px; /* Start position */
+            opacity: 0.6;
+        }
+
+        @keyframes fallRosePetal {
+            to { transform: translateY(120vh) rotate(360deg); }
+        }
+
+
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); /* Stack items on mobile */
+            gap: 10px; /* Reduced gap for mobile */
+            padding: 15px; /* Reduced padding for mobile */
+        }
+
+        .masonry-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .masonry-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .masonry-item:hover img {
+            transform: scale(1.02); /* Reduced scale on hover for mobile */
+        }
+
+        .masonry-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.3); /* Soft white glow */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .masonry-item:hover::after {
+            opacity: 1;
+        }
+
+        .slideshow-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px; /* Add padding for mobile */
+            box-sizing: border-box; /* Ensure padding is included in width/height */
+        }
+
+        .slideshow-content {
+            max-width: 100%; /* Take full width on mobile */
+            max-height: 100%; /* Take full height on mobile */
+            position: relative;
+        }
+
+        .slideshow-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+        }
+
+        .close-slideshow {
+            position: absolute;
+            top: 10px; /* Adjusted close button position for mobile */
+            right: 10px; /* Adjusted close button position for mobile */
+            color: white;
+            font-size: 1.5em; /* Reduced close button size for mobile */
+            cursor: pointer;
+        }
+
+        .countdown-timer {
+            font-size: 1.5em; /* Reduced countdown size for mobile */
+            font-weight: bold;
+            margin-top: 15px; /* Reduced margin for mobile */
+            color: #e53935;
+        }
+
+        .heartbeat {
+            animation: heartbeatAnimation 1s steps(2, start) infinite;
+            display: inline-block;
+            font-size: 0.8em; /* Slightly reduce heartbeat size on mobile */
+        }
+
+        @keyframes heartbeatAnimation {
+            50% { transform: scale(1.05); } /* Reduced heartbeat scale for mobile */
+        }
+
+        .fireworks-ending {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100; /* Above all content */
+            display: none; /* Initially hidden */
+        }
+
+        .firework {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fireworkExplode 2s ease-out forwards, fireworkFadeOut 2s ease-out forwards 2s;
+        }
+
+        @keyframes fireworkExplode {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); opacity: 1; } /* Reduced firework scale for mobile */
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fireworkFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px; /* Reduced confetti size for mobile */
+            height: 8px; /* Reduced confetti size for mobile */
+            border-radius: 50%;
+            opacity: 0;
+            animation: confettiFall var(--confetti-fall-duration) linear infinite, confettiRotate var(--confetti-rotate-duration) linear infinite;
+            background-color: var(--confetti-color);
+            top: -10%;
+            left: var(--confetti-start-pos);
+        }
+
+        @keyframes confettiFall {
+            to { transform: translateY(120vh); opacity: 1; }
+        }
+
+        @keyframes confettiRotate {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(180deg); }
+        }
+
+        .floating-balloon {
+            position: absolute;
+            width: 40px; /* Reduced balloon size for mobile */
+            height: 56px; /* Reduced balloon size for mobile */
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background-color: var(--balloon-color);
+            opacity: 0;
+            bottom: -56px; /* Adjust bottom position for smaller balloon */
+            left: var(--balloon-start-pos);
+            animation: floatBalloon var(--balloon-float-duration) ease-in-out infinite, swingBalloon var(--balloon-swing-duration) ease-in-out infinite alternate;
+            transform-origin: bottom center;
+        }
+
+        .floating-balloon::after {
+            content: '';
+            position: absolute;
+            top: 56px; /* Adjust string position for smaller balloon */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 15px; /* Reduced string height for mobile */
+            background-color: #888;
+        }
+
+        @keyframes floatBalloon {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-80vh); opacity: 1; }
+        }
+
+        @keyframes swingBalloon {
+            0% { transform: translateX(0) rotate(3deg); } /* Reduced swing angle for mobile */
+            100% { transform: translateX(7px) rotate(-3deg); } /* Reduced swing angle for mobile */
+        }
+
+
+        /* Media query for mobile devices (adjust breakpoint as needed) */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            p { font-size: 1em; }
+            .timeline-item img { max-width: 100%; } /* Timeline images take full width on mobile */
+            .carousel-item { width: 90%; max-width: none; /* Carousel items wider on mobile, no max-width restriction */ }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="homepage">
+        <h1>Happy Birthday My Love</h1>
+        <div class="heart-animation">&#10084;</div>
+        <p>To the most amazing person in my life, Happy Birthday! 🎉</p>
+        <p id="personalized-message">
+            </p>
+        </section>
+
+    <section id="timeline">
+        <h2>Our Beautiful Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item" style="--item-delay: 0.1s;">
+                <img src="image1.jpg" alt="First Date">
+                <p>Our First Date - [Date]</p>
+            </div>
+            <div class="timeline-item" style="--item-delay: 0.3s;">
+                <img src="image2.jpg" alt="First Anniversary">
+                <p>First Anniversary - [Date]</p>
+            </div>
+            </div>
+         <div class="carousel-container">
+            <div class="carousel-item"><img src="carousel1.jpg" alt="Carousel Image 1"></div>
+            <div class="carousel-item"><img src="carousel2.jpg" alt="Carousel Image 2"></div>
+            <div class="carousel-item"><img src="carousel3.jpg" alt="Carousel Image 3"></div>
+            </div>
+    </section>
+
+    <section id="surprise">
+        <h2>Surprise Gift!</h2>
+        <div class="gift-box" onclick="revealSurprise()"></div>
+        <div class="surprise-content" id="surpriseContent">
+            <h3>Tap Tap! Here's your Surprise!</h3>
+            <p>A special video message awaits you!</p>
+            <p>Or a custom message: Happy Birthday once again, my dearest!</p>
+        </div>
+        <div class="fireworks-animation" id="fireworksSurprise"></div>
+    </section>
+
+    <section id="love-letter">
+        <h2>A Little Love Letter</h2>
+        <div class="rose-petals" id="rosePetals">
+            </div>
+        <div class="love-letter-text typing-animation" id="loveLetterText">
+            </div>
+    </section>
+
+    <section id="photo-gallery">
+        <h2>Photo Memories Gallery</h2>
+        <div class="masonry-grid" id="photoGrid">
+            </div>
+        <div class="slideshow-overlay" id="slideshowOverlay">
+            <span class="close-slideshow" onclick="closeSlideshow()">&times;</span>
+            <div class="slideshow-content">
+                <img src="" alt="Slideshow Image" class="slideshow-image" id="slideshowImage">
+            </div>
+        </div>
+    </section>
+
+    <section id="countdown-section">
+        <h2>Countdown to Our Anniversary</h2>
+        <div class="countdown-timer" id="countdownTimer">
+            </div>
+        <div class="heartbeat">&#10084;</div>
+    </section>
+
+    <section id="fireworks-ending-section">
+        <h2 style="color: white; text-shadow: 2px 2px 5px black;">I Love You</h2>
+        <div class="fireworks-ending" id="fireworksEnding"></div>
+        <div class="confetti-container" id="confettiContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;"></div>
+        <div class="balloons-container" id="balloonsContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;"></div>
+    </section>
+
+    <script>
+        // Personalized Message (Optional)
+        document.getElementById('personalized-message').textContent = "Wishing you a day as beautiful as you are!";
+
+        // Timeline Items Animation (Already handled by CSS with delay)
+
+        // Surprise Section - Gift Reveal
+        function revealSurprise() {
+            const surpriseContent = document.getElementById('surpriseContent');
+            const fireworksSurprise = document.getElementById('fireworksSurprise');
+            surpriseContent.style.display = 'block';
+            fireworksSurprise.innerHTML = ''; // Clear any existing fireworks
+            createFireworks(fireworksSurprise, 50); // Create fireworks for surprise section
+        }
+
+        // Fireworks Function (reusable)
+        function createFireworks(container, numberOfFireworks) {
+            for (let i = 0; i < numberOfFireworks; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = `${Math.random() * 100}vw`;
+                firework.style.top = `${Math.random() * 50}vh`;
+                firework.style.width = `${Math.random() * 10 + 20}px`;
+                firework.style.height = firework.style.width;
+                firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                firework.style.animationDelay = `${Math.random() * 2}s`;
+                container.appendChild(firework);
+            }
+        }
+
+        // Love Letter Section - Typing Animation & Rose Petals
+        const loveLetterTextElement = document.getElementById('loveLetterText');
+        const loveLetter = `My dearest love,\n\nOn your special day, I wanted to create something as unique and beautiful as you are. This website is a small token of my love, filled with memories, surprises, and heartfelt words.\n\nEvery moment with you is a treasure, and I cherish our journey together. May this birthday be the start of another wonderful year filled with love, laughter, and countless blessings.\n\nWith all my love,\nYours forever.`;
+        let letterIndex = 0;
+
+        function typeWriter() {
+            if (letterIndex < loveLetter.length) {
+                loveLetterTextElement.textContent += loveLetter.charAt(letterIndex);
+                letterIndex++;
+                setTimeout(typeWriter, 30); // Typing speed
+            }
+        }
+        typeWriter();
+
+        const rosePetalsContainer = document.getElementById('rosePetals');
+        function createRosePetals(numberOfPetals = 20) {
+            for (let i = 0; i < numberOfPetals; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.textContent = '🌹';
+                petal.style.setProperty('--petal-start-pos', `${Math.random() * 100}vw`);
+                petal.style.setProperty('--fall-duration', `${Math.random() * 5 + 5}s`);
+                petal.style.animationDelay = `-${Math.random() * 5}s`; // Offset start times
+                rosePetalsContainer.appendChild(petal);
+            }
+        }
+        createRosePetals();
+
+
+        // Photo Memories Gallery - Masonry Grid & Slideshow
+        const photoGrid = document.getElementById('photoGrid');
+        const slideshowOverlay = document.getElementById('slideshowOverlay');
+        const slideshowImage = document.getElementById('slideshowImage');
+        const photos = [
+            'photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg' // Add your image filenames
+        ];
+
+        photos.forEach(photo => {
+            const item = document.createElement('div');
+            item.className = 'masonry-item';
+            const img = document.createElement('img');
+            img.src = photo;
+            img.alt = 'Memory Photo';
+            img.onclick = () => openSlideshow(photo); // Open slideshow on click
+            item.appendChild(img);
+            photoGrid.appendChild(item);
+        });
+
+        function openSlideshow(imageSrc) {
+            slideshowImage.src = imageSrc;
+            slideshowOverlay.style.display = 'flex';
+        }
+
+        function closeSlideshow() {
+            slideshowOverlay.style.display = 'none';
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const anniversaryDate = new Date('2024-12-25T00:00:00').getTime(); // Set your anniversary date and time
+            const now = new Date().getTime();
+            const difference = anniversaryDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('countdownTimer').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                document.getElementById('countdownTimer').textContent = "It's Anniversary Time!";
+                clearInterval(countdownInterval); // Stop interval if anniversary passed
+            }
+        }
+
+        updateCountdown(); // Initial call
+        const countdownInterval = setInterval(updateCountdown, 1000); // Update every second
+
+        // Fireworks Ending Show
+        function startFireworksEnding() {
+            const fireworksEndingContainer = document.getElementById('fireworksEnding');
+            fireworksEndingContainer.style.display = 'block';
+            createFireworks(fireworksEndingContainer, 100); // More fireworks for ending
+
+            const confettiContainer = document.getElementById('confettiContainer');
+            createConfetti(confettiContainer, 150);
+
+            const balloonsContainer = document.getElementById('balloonsContainer');
+            createBalloons(balloonsContainer, 20);
+        }
+
+        function createConfetti(container, numberOfConfetti) {
+            for (let i = 0; i < numberOfConfetti; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.setProperty('--confetti-start-pos', `${Math.random() * 100}vw`);
+                confetti.style.setProperty('--confetti-fall-duration', `${Math.random() * 5 + 3}s`);
+                confetti.style.setProperty('--confetti-rotate-duration', `${Math.random() * 10 + 5}s`);
+                confetti.style.setProperty('--confetti-color', getRandomColor());
+                confetti.style.animationDelay = `-${Math.random() * 5}s`;
+                container.appendChild(confetti);
+            }
+        }
+
+        function createBalloons(container, numberOfBalloons) {
+            for (let i = 0; i < numberOfBalloons; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'floating-balloon';
+                balloon.style.setProperty('--balloon-start-pos', `${Math.random() * 100}vw`);
+                balloon.style.setProperty('--balloon-float-duration', `${Math.random() * 15 + 10}s`);
+                balloon.style.setProperty('--balloon-swing-duration', `${Math.random() * 4 + 3}s`);
+                balloon.style.setProperty('--balloon-color', getRandomPastelColor());
+                balloon.style.animationDelay = `-${Math.random() * 10}s`;
+                container.appendChild(balloon);
+            }
+        }
+
+
+        function getRandomColor() {
+            const colors = ['#fceabb', '#f8b8d4', '#b2fef7', '#fcf7c9', '#f2fcff'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function getRandomPastelColor() {
+            let hue = Math.floor(Math.random() * 360);
+            let saturation = 25 + Math.floor(Math.random() * 75);
+            let lightness = 75 + Math.floor(Math.random() * 25);
+            return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        }
+
+        // Trigger fireworks ending after countdown reaches zero or after a delay for demo
+        // For demo purposes, start fireworks after 5 seconds of page load:
+        setTimeout(startFireworksEnding, 5000); // 5 seconds delay for demo, remove or adjust as needed
+        // In real scenario, call startFireworksEnding() when countdown reaches zero inside updateCountdown() function
+
+    </script>
+
+</body>
+</html>
